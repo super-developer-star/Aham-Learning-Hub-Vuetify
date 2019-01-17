@@ -1,2 +1,2 @@
-# Aham-Learning-Hub-Vuetify
+# Aham-Learning-Hub
 Aham-Learning-Hub
