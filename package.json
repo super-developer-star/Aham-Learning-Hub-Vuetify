@@ -1,0 +1,33 @@
+{
+  "name": "aham-learners-admin",
+  "version": "1.0.0",
+  "discription": "aham learners admin panel",
+  "author": "Revaz Tsiklauri(revaztsiklauri@gmail.com)",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "dev": "npm run serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "vue": "^2.5.22",
+    "vuetify": "^1.4.2"
+  },
+  "devDependencies": {
+    "@mdi/font": "^3.3.92",
+    "@vue/cli-plugin-babel": "^3.3.0",
+    "@vue/cli-plugin-eslint": "^3.3.0",
+    "@vue/cli-service": "^3.3.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "axios": "^0.18.0",
+    "material-design-icons-iconfont": "^4.0.4",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "vue-router": "^3.0.2",
+    "vue-template-compiler": "^2.5.22",
+    "vuex": "^3.0.1"
+  }
+}
