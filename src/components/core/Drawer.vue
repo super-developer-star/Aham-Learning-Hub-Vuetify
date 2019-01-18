@@ -1,14 +1,6 @@
 <template>
-  <v-navigation-drawer
-    id="app-drawer"
-    v-model="inputValue"
-    app
-    dark
-    floating
-    persistent
-    mobile-break-point="991"
-    width="260"
-  >
+  <v-navigation-drawer id="app-drawer" v-model="inputValue" app dark floating persistent mobile-break-point="991"
+                       width="260">
     <v-layout
       class="fill-height"
       tag="v-list"
@@ -32,11 +24,7 @@
       <v-list-tile
         v-if="responsive"
       >
-        <v-text-field
-          class="purple-input search-input"
-          label="Search..."
-          color="purple"
-        />
+        <v-text-field class="purple-input search-input" label="Search..." color="purple"/>
       </v-list-tile>
       <v-list-tile
         v-for="(link, i) in links"
@@ -66,39 +54,100 @@ export default {
     logo: './img/vuetifylogo.png',
     links: [
       {
-        to: '/dashboard',
+        to: '/profile',
         icon: 'mdi-view-dashboard',
-        text: 'Dashboard'
+        text: 'Profile',
+        children: [
+          {
+            to: '/personal-information',
+            icon: 'mdi-view-dashboard',
+            text: 'Personal Information'
+          },
+          {
+            to: '/education',
+            icon: 'mdi-view-dashboard',
+            text: 'Education'
+          },
+          {
+            to: '/interested-subjects',
+            icon: 'mdi-view-dashboard',
+            text: 'Interested Subjects'
+          },
+          {
+            to: '/certified-topics',
+            icon: 'mdi-view-dashboard',
+            text: 'Certified Topics'
+          }
+        ]
       },
       {
-        to: '/user-profile',
-        icon: 'mdi-account',
-        text: 'User Profile'
+        to: '/class',
+        icon: 'mdi-view-dashboard',
+        text: 'Class'
       },
       {
-        to: '/table-list',
-        icon: 'mdi-clipboard-outline',
-        text: 'Table List'
+        to: '/goals',
+        icon: 'mdi-view-dashboard',
+        text: 'Goals'
       },
       {
-        to: '/typography',
-        icon: 'mdi-format-font',
-        text: 'Typography'
+        to: '/aham-credits',
+        icon: 'mdi-view-dashboard',
+        text: 'Aham Credits'
       },
       {
-        to: '/icons',
-        icon: 'mdi-chart-bubble',
-        text: 'Icons'
+        to: '/browse-catalogue',
+        icon: 'mdi-view-dashboard',
+        text: 'Browse Catalogue'
+      }
+    ],
+    items: [
+      {
+        to: '/profile',
+        icon: 'mdi-view-dashboard',
+        text: 'Profile',
+        children: [
+          {
+            to: '/personal-information',
+            icon: 'mdi-view-dashboard',
+            text: 'Personal Information'
+          },
+          {
+            to: '/education',
+            icon: 'mdi-view-dashboard',
+            text: 'Education'
+          },
+          {
+            to: '/interested-subjects',
+            icon: 'mdi-view-dashboard',
+            text: 'Interested Subjects'
+          },
+          {
+            to: '/certified-topics',
+            icon: 'mdi-view-dashboard',
+            text: 'Certified Topics'
+          }
+        ]
       },
       {
-        to: '/maps',
-        icon: 'mdi-map-marker',
-        text: 'Maps'
+        to: '/class',
+        icon: 'mdi-view-dashboard',
+        text: 'Class'
       },
       {
-        to: '/notifications',
-        icon: 'mdi-bell',
-        text: 'Notifications'
+        to: '/goals',
+        icon: 'mdi-view-dashboard',
+        text: 'Goals'
+      },
+      {
+        to: '/aham-credits',
+        icon: 'mdi-view-dashboard',
+        text: 'Aham Credits'
+      },
+      {
+        to: '/browse-catalogue',
+        icon: 'mdi-view-dashboard',
+        text: 'Browse Catalogue'
       }
     ],
     responsive: false
@@ -112,9 +161,6 @@ export default {
       set (val) {
         this.setDrawer(val)
       }
-    },
-    items () {
-      return this.$t('Layout.View.items')
     }
   },
   mounted () {

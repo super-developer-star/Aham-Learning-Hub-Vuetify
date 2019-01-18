@@ -1,6 +1,6 @@
 <template>
-  <v-footer fixed>
-    Aham Learners Admin
+  <v-footer app inset class="elevation-2" color="#f5f5f5">
+    <span class="ml-3">&copy; 2019 - Aham Learning Hub</span>
   </v-footer>
 </template>
 

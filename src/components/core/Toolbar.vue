@@ -3,6 +3,7 @@
     flat
     prominent
     style="border-radius: 0;"
+    class="elevation-1"
   >
     <div class="v-toolbar-title">
       <v-toolbar-title
@@ -10,12 +11,12 @@
       >
         <v-btn
           v-if="responsive"
-          class="default v-btn--simple"
+          class="v-btn--simple"
           dark
           icon
           @click.stop="onClickBtn"
         >
-          <v-icon>mdi-view-list</v-icon>
+          <v-icon color="tertiary">mdi-view-list</v-icon>
         </v-btn>
         {{ title }}
       </v-toolbar-title>
@@ -125,7 +126,7 @@ export default {
   methods: {
     ...mapMutations(['setDrawer', 'toggleDrawer']),
     onClickBtn () {
-      this.setDrawer(!this.$store.state.app.drawer)
+      this.setDrawer(!this.$store.state.drawer)
     },
     onClick () {
       //
