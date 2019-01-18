@@ -1,108 +1,62 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Main from '../views/Main'
-import Dashboard from '../views/Dashboard'
-
 Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    {
-      path: '',
-      name: 'Dashboard',
-      component: Dashboard
-    },
+    { path: '', name: 'Dashboard', component: () => import('../views/Dashboard') },
     {
       path: '/profile',
-      redirect: {path: '/profile/personal-information'},
-      component: Main,
-    },
-    {
-      path: '/profile/personal-information',
-      name: 'personal-information',
-      component: Dashboard
-    },
-    {
-      path: '/profile/education',
-      name: 'education',
-      component: Main
-    },
-    {
-      path: '/profile/interested-subjects',
-      name: 'interested-subjects',
-      component: Main
-    },
-    {
-      path: '/profile/certified-topics',
-      name: 'certified-topics',
-      component: Main
+      component: () => import('../views/Main'),
+      children: [
+        {
+          path: 'personal-information',
+          name: 'personal-information',
+          component: () => import('../views/Profile/PersonalInformation')
+        },
+        { path: 'education', name: 'education', component: () => import('../views/Profile/Education') },
+        {
+          path: 'interested-subjects',
+          name: 'interested-subjects',
+          component: () => import('../views/Profile/InterestedSubjects')
+        },
+        {
+          path: 'certified-topics',
+          name: 'certified-topics',
+          component: () => import('../views/Profile/CertifiedTopics')
+        }
+      ]
     },
     {
       path: '/class',
-      component: Main,
+      component: () => import('../views/Main'),
       children: [
-        {
-          path: 'scheduled',
-          name: 'scheduled',
-          component: Main
-        },
-        {
-          path: 'recommended',
-          name: 'recommended',
-          component: Main
-        },
-        {
-          path: 'requested',
-          name: 'requested',
-          component: Main
-        },
+        { path: 'scheduled', name: 'scheduled', component: () => import('../views/Main') },
+        { path: 'recommended', name: 'recommended', component: () => import('../views/Main') },
+        { path: 'requested', name: 'requested', component: () => import('../views/Main') }
       ]
     },
     {
       path: '/goals',
-      component: Main,
+      component: () => import('../views/Main'),
       children: [
-        {
-          path: 'progress',
-          name: 'progress',
-          component: Main
-        },
-        {
-          path: 'future',
-          name: 'future',
-          component: Main
-        }
+        { path: 'progress', name: 'progress', component: () => import('../views/Main') },
+        { path: 'future', name: 'future', component: () => import('../views/Main') }
       ]
     },
     {
       path: '/aham-credits',
-      component: Main,
+      component: () => import('../views/Main'),
       children: [
-        {
-          path: 'balance',
-          name: 'balance',
-          component: Main
-        },
-        {
-          path: 'history',
-          name: 'history',
-          component: Main
-        },
-        {
-          path: 'statement',
-          name: 'statement',
-          component: Main
-        }
+        { path: 'balance', name: 'balance', component: () => import('../views/Main') },
+        { path: 'history', name: 'history', component: () => import('../views/Main') },
+        { path: 'statement', name: 'statement', component: () => import('../views/Main') }
       ]
     },
-    {
-      path: '/browse-catalogue',
-      name: 'browse-catalogue',
-      component: Main
-    }
+    { path: '/browse-catalogue', name: 'browse-catalogue', component: () => import('../views/Main') }
   ]
 })
 

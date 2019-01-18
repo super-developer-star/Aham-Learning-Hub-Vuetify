@@ -1,37 +1,51 @@
 <template>
   <v-navigation-drawer id="app-drawer" v-model="inputValue" app dark floating persistent mobile-break-point="991"
                        width="260">
-    <v-list expand>
-      <template v-for="(item, i) in menus">
-        <!--group with subitems-->
-        <v-list-group v-if="item.items" :key="item.name" :group="item.name" :prepend-icon="item.icon" no-action>
-          <v-list-tile slot="activator" ripple>
+    <v-layout class="fill-height" tag="v-list" column>
+      <v-list>
+        <v-list-tile avatar>
+          <v-list-tile-avatar color="white">
+            <v-img :src="logo" height="34" contain/>
+          </v-list-tile-avatar>
+          <v-list-tile-title class="title">
+            Aham Learning Hub
+          </v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+      <v-divider/>
+
+      <v-list expand>
+        <template v-for="item in menus">
+          <!--group with subitems-->
+          <v-list-group v-if="item.items" :key="item.name" :group="item.name" :prepend-icon="item.icon" no-action>
+            <v-list-tile slot="activator" ripple>
+              <v-list-tile-content>
+                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <template v-for="(subItem, i) in item.items">
+              <v-list-tile :key="i" :to="{name: subItem.name}" active-class="success">
+                <v-list-tile-action v-if="subItem.icon">
+                  <v-icon>{{ subItem.icon }}</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title><span>{{ subItem.title }}</span></v-list-tile-title>
+                </v-list-tile-content>
+              </v-list-tile>
+            </template>
+          </v-list-group>
+          <!--top-level link-->
+          <v-list-tile v-else :to="{name: item.name}" :key="item.name" ripple class="single-item">
+            <v-list-tile-action v-if="item.icon">
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>{{ item.title }}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-          <template v-for="(subItem, i) in item.items">
-            <v-list-tile :key="i" :to="{name: subItem.name}">
-              <v-list-tile-action v-if="subItem.icon">
-                <v-icon>{{ subItem.icon }}</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title><span>{{ subItem.title }}</span></v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </template>
-        </v-list-group>
-        <!--top-level link-->
-        <v-list-tile v-else :to="{name: item.name}" :key="item.name" ripple>
-          <v-list-tile-action v-if="item.icon">
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </template>
-    </v-list>
+        </template>
+      </v-list>
+    </v-layout>
   </v-navigation-drawer>
 </template>
 
