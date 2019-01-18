@@ -1,47 +1,37 @@
 <template>
   <v-navigation-drawer id="app-drawer" v-model="inputValue" app dark floating persistent mobile-break-point="991"
                        width="260">
-    <v-layout
-      class="fill-height"
-      tag="v-list"
-      column
-    >
-      <v-list-tile avatar>
-        <v-list-tile-avatar
-          color="white"
-        >
-          <v-img
-            :src="logo"
-            height="34"
-            contain
-          />
-        </v-list-tile-avatar>
-        <v-list-tile-title class="title">
-          Aham Learners Hub
-        </v-list-tile-title>
-      </v-list-tile>
-      <v-divider/>
-      <v-list-tile
-        v-if="responsive"
-      >
-        <v-text-field class="purple-input search-input" label="Search..." color="purple"/>
-      </v-list-tile>
-      <v-list-tile
-        v-for="(link, i) in links"
-        :key="i"
-        :to="link.to"
-        :active-class="color"
-        avatar
-        class="v-list-item"
-      >
-        <v-list-tile-action>
-          <v-icon>{{ link.icon }}</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-title
-          v-text="link.text"
-        />
-      </v-list-tile>
-    </v-layout>
+    <v-list expand>
+      <template v-for="(item, i) in menus">
+        <!--group with subitems-->
+        <v-list-group v-if="item.items" :key="item.name" :group="item.name" :prepend-icon="item.icon" no-action>
+          <v-list-tile slot="activator" ripple>
+            <v-list-tile-content>
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <template v-for="(subItem, i) in item.items">
+            <v-list-tile :key="i" :to="{name: subItem.name}">
+              <v-list-tile-action v-if="subItem.icon">
+                <v-icon>{{ subItem.icon }}</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title><span>{{ subItem.title }}</span></v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </template>
+        </v-list-group>
+        <!--top-level link-->
+        <v-list-tile v-else :to="{name: item.name}" :key="item.name" ripple>
+          <v-list-tile-action v-if="item.icon">
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </template>
+    </v-list>
   </v-navigation-drawer>
 </template>
 
@@ -51,103 +41,52 @@ import { mapMutations, mapState } from 'vuex'
 export default {
   name: 'Drawer',
   data: () => ({
-    logo: './img/vuetifylogo.png',
-    links: [
+    logo: '/img/vuetifylogo.png',
+    menus: [
       {
-        to: '/profile',
+        title: 'Profile',
+        name: 'profile',
         icon: 'mdi-view-dashboard',
-        text: 'Profile',
-        children: [
-          {
-            to: '/personal-information',
-            icon: 'mdi-view-dashboard',
-            text: 'Personal Information'
-          },
-          {
-            to: '/education',
-            icon: 'mdi-view-dashboard',
-            text: 'Education'
-          },
-          {
-            to: '/interested-subjects',
-            icon: 'mdi-view-dashboard',
-            text: 'Interested Subjects'
-          },
-          {
-            to: '/certified-topics',
-            icon: 'mdi-view-dashboard',
-            text: 'Certified Topics'
-          }
+        items: [
+          { name: 'personal-information', title: 'Personal Information' },
+          { name: 'education', title: 'Education' },
+          { name: 'interested-subjects', title: 'Interested Subjects' },
+          { name: 'certified-topics', title: 'Certified Topics' }
         ]
       },
       {
-        to: '/class',
+        title: 'Class',
+        name: 'class',
         icon: 'mdi-view-dashboard',
-        text: 'Class'
-      },
-      {
-        to: '/goals',
-        icon: 'mdi-view-dashboard',
-        text: 'Goals'
-      },
-      {
-        to: '/aham-credits',
-        icon: 'mdi-view-dashboard',
-        text: 'Aham Credits'
-      },
-      {
-        to: '/browse-catalogue',
-        icon: 'mdi-view-dashboard',
-        text: 'Browse Catalogue'
-      }
-    ],
-    items: [
-      {
-        to: '/profile',
-        icon: 'mdi-view-dashboard',
-        text: 'Profile',
-        children: [
-          {
-            to: '/personal-information',
-            icon: 'mdi-view-dashboard',
-            text: 'Personal Information'
-          },
-          {
-            to: '/education',
-            icon: 'mdi-view-dashboard',
-            text: 'Education'
-          },
-          {
-            to: '/interested-subjects',
-            icon: 'mdi-view-dashboard',
-            text: 'Interested Subjects'
-          },
-          {
-            to: '/certified-topics',
-            icon: 'mdi-view-dashboard',
-            text: 'Certified Topics'
-          }
+        items: [
+          { name: 'scheduled', title: 'Scheduled for me' },
+          { name: 'recommended', title: 'Recommended to me' },
+          { name: 'requested', title: 'Requested by me' }
         ]
       },
       {
-        to: '/class',
+        title: 'Goals',
+        name: 'goals',
         icon: 'mdi-view-dashboard',
-        text: 'Class'
+        items: [
+          { name: 'progress', title: 'Goals in progress' },
+          { name: 'future', title: 'Goals for future' }
+        ]
       },
       {
-        to: '/goals',
+        title: 'Aham Credits',
+        name: 'credits',
         icon: 'mdi-view-dashboard',
-        text: 'Goals'
+        items: [
+          { name: 'balance', title: 'My Credits Balance' },
+          { name: 'history', title: 'Credit Purchase History' },
+          { name: 'statement', title: 'Credit Statement' }
+        ]
       },
       {
-        to: '/aham-credits',
-        icon: 'mdi-view-dashboard',
-        text: 'Aham Credits'
-      },
-      {
-        to: '/browse-catalogue',
-        icon: 'mdi-view-dashboard',
-        text: 'Browse Catalogue'
+        title: 'Browse Catalogue',
+        name: 'browse-catalogue',
+        icon: 'mdi-view-dashboard'
       }
     ],
     responsive: false

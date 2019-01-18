@@ -118,6 +118,8 @@ export default {
   mounted () {
     this.onResponsiveInverted()
     window.addEventListener('resize', this.onResponsiveInverted)
+
+    this.title = this.$route.name
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.onResponsiveInverted)
